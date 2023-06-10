@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Paper.js</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.17/paper-full.min.js"
+    integrity="sha512-NApOOz1j2Dz1PKsIvg1hrXLzDFd62+J0qOPIhm8wueAnk4fQdSclq6XvfzvejDs6zibSoDC+ipl1dC66m+EoSQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- defer waits for dom to load before excecuting script -->
+  <script src="waves.js" async defer></script>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <br>
+  <a id="save" download="PaperJS.svg">
+    <button>save</button>
+  </a>
+
+  <script>
+    // This script makes the save button function.
+    (() => {
+      var saveButton = document.getElementById('save');
+      saveButton.addEventListener('click', (e) => {
+        var svg = paper.project.exportSVG();
+        var serializer = new XMLSerializer();
+        var serializedSvg = serializer.serializeToString(svg);
+
+        saveButton.href = 'data:image/svg+xml;base64,' + btoa(serializedSvg);
+      })
+    })()
+  </script>
+
+  <!--
+  This script places a badge on your repl's full-browser view back to your repl's cover
+  page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
+  teal, blue, blurple, magenta, pink!
+  -->
+  <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script>
+</body>
+
+</html>
